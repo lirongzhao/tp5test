@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">添加新闻</h3>
+    </div>
+    <div class="panel-body">
+        <form action="/admin/news" method="post">
+            <div>
+                新闻标题：<input type="text" name="name">
+                添加图片：<img src="create.html" alt="图片">
+            </div>
+            <div>
+                概要&nbsp;：<textarea name="desc" ></textarea>
+            </div>
+            <div>
+                作者：
+                <select name="uid">
+                    <option value="">--请选择--</option>
+                    {volist name="users" id="vo"}
+                    <option value="{$vo.id}">{$vo.username}</option>
+                    {/volist}
+                </select>
+            </div>
+            <div>
+                新闻内容：<textarea name="content"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="提交">
+            </div>
+        </form>
+    </div>
+</div>

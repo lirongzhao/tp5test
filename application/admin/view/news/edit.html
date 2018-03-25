@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">编辑新闻</h3>
+    </div>
+    <div class="panel-body">
+        <form action="/admin/news/{$row.id}" method="post">
+            <div>
+                新闻标题：<input type="text" name="name" value="{$row.name}">
+            </div>
+            <div>
+                概要&nbsp;：<textarea name="desc"  >{$row.desc}</textarea>
+            </div>
+            <div>
+                作者：
+                <select name="uid">
+                    <option value="">--请选择--</option>
+                    {volist name="users" id="vo"}
+                    {eq name="row.uid" value="$vo['id']"}
+                        <option value="{$vo.id}" selected="selected">{$vo.username} </option>
+                        {else/}
+                        <option value="{$vo.id}">{$vo.username}</option>
+                    {/eq}
+                    {/volist}
+                </select>
+            </div>
+            <div>
+                新闻内容：<textarea name="content">{$row.content}</textarea>
+            </div>
+            <div>
+                <input type="hidden" name="_method" value="PUT">
+                <input type="submit" value="修改">
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">用户登录</h3>
+    </div>
+    <div class="panel-body">
+        <form action="/index/user/dologin" method="post">
+            <div>
+                用户名：<input type="text" name="username">
+            </div>
+            <div>
+                密码：<input type="password" name="password">
+            </div>
+            <div>
+                验证码：<input type="text" name="captcha">
+                <!--{:captcha_img('login')}-->
+                <!--this代表img对象-->
+                <img src="{:captcha_src('login')}" onclick="changeCaptcha(this)">
+            </div>
+            <div>
+                <input type="submit" value="登录">
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function changeCaptcha(obj) {
+        //单击以后修改图片的src属性，
+        $(obj).attr('src',"{:captcha_src('login')}?"+Math.random());
+    }
+</script>

@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">新闻管理</h3>
+    </div>
+    <div class="panel-body">
+        <div class="panel-body">
+            <a href="/admin/news/create">添加新闻</a>
+            <table class="table">
+                <tr><th>序号</th><th>标题</th><th>简介</th><th>发表者</th><th>添加时间</th><th>操作</th>
+                </tr>
+
+                {volist name="rows" id="vo"}
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.desc}</td>
+                    <td>{$vo->user->username}</td>
+                    <td>{$vo->create_time}</td><td>
+                    <a href="/admin/news/{$vo->id}/edit">修改</a>
+                    <a href="/admin/news/{$vo->id}" onclick="deleteNews(this);return false;">删除</a>
+                </td>
+                </tr>
+                {/volist}
+            </table>
+            <ul class="pagination">
+                {$rows->render()}
+
+    </div>
+</div>
+
+<script>
+    function deleteNews(obj){
+        if(confirm('您确认删除吗')){
+            $.ajax({
+                url:$(obj).attr('href'),
+                type:"DELETE",
+                success:function(data){
+                    if(data =="ok"){
+                        //alert('删除成功');
+                        //
+                         obj.parentNode.parentNode.parentNode.removeChild(obj.parentNode.parentNode);
+                    }else{alert('删除失败');}
+                }
+            });
+        }
+
+    }
+</script>
